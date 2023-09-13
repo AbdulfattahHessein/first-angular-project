@@ -1,0 +1,10 @@
+#bannerimage {
+  width: 100%;
+  background-image: url(../../../assets/images/vecteezy_online.jpg);
+  height: 400px;
+  background-color: purple;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+

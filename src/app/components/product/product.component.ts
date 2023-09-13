@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ICategory } from 'src/app/models/ICategory';
 import { IProduct } from 'src/app/models/IProduct';
 
 @Component( {
@@ -6,10 +7,11 @@ import { IProduct } from 'src/app/models/IProduct';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
 } )
-export class ProductComponent {
+export class ProductComponent implements OnInit {
 
+  static counter : number = 0;
   // showImage: boolean = false;
-
+  selectedCategoryId: number = 0;
   clientName: string = 'Taha';
   products: IProduct[] = [
     {
@@ -75,7 +77,18 @@ export class ProductComponent {
     },
 
   ];
+  categories: ICategory[] = [
+    { id: 1, name: "Laptop" },
+    { id: 2, name: "Camera" },
+  ];
 
+  constructor() {
+    // console.log("HI Taha");
+
+  }
+  ngOnInit(): void {
+    console.log( "HI Taha" );
+  }
   // constructor( _products: IProduct[], _clientName: string ) {
   //   this.products = _products;
   //   this.clientName = _clientName;
@@ -92,10 +105,15 @@ export class ProductComponent {
     return product!.enable;
   }
 
-  decreaseQuantity(id: number)
-  {
+  decreaseQuantity( id: number ) {
     let product = this.products.find( p => p.id == id );
     return product!.quantity--;
+  }
+  logMessage()
+  {
+    console.log( "Taha Hussein" );
+    // return `Message: ${++ProductComponent.counter}`
+
   }
 
 }

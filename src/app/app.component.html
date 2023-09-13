@@ -2,9 +2,13 @@
 <div class="container-fluid">
   <div class="row">
     <!-- Sidebar -->
-    <app-sidebar style="padding: 0%;" class=" col-sm-3"></app-sidebar>
+    <app-sidebar *ngIf="showSidebar == true" class="col-sm-3 p-0"></app-sidebar>
     <!-- Main Content -->
-    <app-product style="padding: 0%;" class="col-md-9"></app-product>
+    <!-- <app-product style="padding: 0%;" class="col-md-9"></app-product> -->
+    <div class="col-md-9 p-0">
+      <router-outlet></router-outlet>
+    </div>
+
   </div>
 </div>
 <app-footer></app-footer>

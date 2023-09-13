@@ -1,14 +1,31 @@
+<h1>{{ logMessage() }}</h1>
 <section style="background-color: #eee">
   <div class="container py-5">
+    <div class="px-5 mb-5">
+      <select name="productName" class="form-select" [(ngModel)]="selectedCategoryId">
+        <option [value]="0">All</option>
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
     <div *ngFor="let product of products" class="row justify-content-center mb-3">
-      <div  CardStyle [class.bg-warning]="product.quantity == 1" class="col-md-12 col-xl-10">
+      <div *ngIf="
+          product.categoryId == selectedCategoryId || selectedCategoryId == 0
+        " [class.bg-warning]="product.quantity == 1" class="col-md-12 col-xl-10 rounded-4">
         <div class="card shadow-0 border rounded-3">
           <div class="card-body">
             <div class="row">
               <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
                 <div class="bg-image hover-zoom ripple rounded ripple-surface">
-                  <img [src]="product.img" class="w-100" *ngIf="product.enable" />
-                  <h1 *ngIf="!product.enable" class="text-success mt-3 text-center ">Thanks {{clientName}}</h1>
+
+                  <img [routerLink]="['/Products', product.id]" CardStyle [src]="product.img"
+                    class="w-100 cursor-pointer" *ngIf="product.enable" />
+
+                  <h1 *ngIf="!product.enable" class="text-success mt-3 text-center">
+                    Thanks
+                    {{ clientName }}
+                  </h1>
                   <a href="#!">
                     <div class="hover-overlay">
                       <div class="mask" style="background-color: rgba(253, 253, 253, 0.15)"></div>
@@ -28,8 +45,11 @@
                     <i class="fa fa-star"></i>
                   </div>
                   <div>
-                    Quantity: <span [class.text-success]="product.quantity > 0">
-                      {{ product.quantity }}</span>
+                    Quantity:
+                    <!-- <span [class.text-success]="product.quantity > 0" [class.text-danger]="product.quantity <= 0"> -->
+                    <span class="{{product.quantity > 0 ? 'text-success': 'text-danger'}}">
+                      {{ product.quantity }}
+                    </span>
 
                     <div class="mt-1" [ngSwitch]="product.quantity">
                       <span *ngSwitchCase="1">last one item</span>
@@ -38,28 +58,35 @@
                       <span *ngSwitchDefault>in stock</span>
                     </div>
                   </div>
-
                 </div>
-                <h4 *ngIf="product.discount != 0" [ngStyle]="{color: 'red'}" class="mt-5">
-                  We offer an explicit discount of: {{product.discount}}
+                <h6 *ngIf="product.discount != 0" [ngStyle]="{ color: 'red' }" class="mt-5">
+                  We offer an explicit discount of:
+                  {{ product.discount }}
+                </h6>
+                <h4>
+                  {{ "12345678912312356" | creditCard }}
                 </h4>
               </div>
               <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
                 <div class="d-flex flex-row align-items-center mb-1">
                   <h4 class="mb-1 me-1">
-                    {{ product.price }}
+                    {{ product.price | currency : "EGP" }}
                   </h4>
-
-
-                  <!-- <span class="text-danger"><s>$20.99</s></span> -->
                 </div>
                 <h6 class="text-success">Free shipping</h6>
                 <div class="d-flex flex-column mt-4">
-                  <button [disabled]="product.quantity == 0" (click)="hideImage(product.id) == false && decreaseQuantity(product.id) == 0" class="btn btn-primary btn-sm" type="button">
+                  <button [disabled]="product.quantity == 0" (click)="
+                      hideImage(product.id) == false &&
+                        decreaseQuantity(product.id) == 0
+                    " class="btn btn-primary btn-sm" type="button">
                     Buy
                   </button>
-                  <button [disabled]="product.quantity == 0" (click)="decreaseQuantity(product.id)" class="btn btn-outline-primary btn-sm mt-2" type="button">
+                  <button [disabled]="product.quantity == 0" (click)="decreaseQuantity(product.id)"
+                    class="btn btn-outline-primary btn-sm mt-2" type="button">
                     Add to wishlist
+                  </button>
+                  <button [routerLink]="['/Products', product.id]" class="btn btn-success btn-sm mt-2" type="button">
+                    Show Details
                   </button>
                 </div>
               </div>

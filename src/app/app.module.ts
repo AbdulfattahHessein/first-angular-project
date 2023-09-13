@@ -9,8 +9,11 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MainComponent } from './components/main/main.component';
 import { ProductComponent } from './components/product/product.component';
 import { CardStyleDirective } from './directives/card-style.directive';
+import { CreditCardPipe } from './pipes/creditCard.pipe';
+import { FormsModule } from '@angular/forms';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
-@NgModule({
+@NgModule( {
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -18,13 +21,16 @@ import { CardStyleDirective } from './directives/card-style.directive';
     FooterComponent,
     MainComponent,
     ProductComponent,
-    CardStyleDirective
+    CardStyleDirective,
+    CreditCardPipe,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
-})
+} )
 export class AppModule { }
