@@ -1,14 +1,11 @@
-<h1>{{ logMessage() }}</h1>
+<!-- <h1>{{ logMessage('') }}</h1> -->
+<!-- <div class="d-grid gap-2"> -->
+<!-- <button (click)="logMessage($event)" type="button" name="" id="" class="btn btn-primary">Click</button> -->
+<!-- </div> -->
+<!-- <h1>{{logMessage()}}</h1> -->
+<!-- <h1>{{"30109142700596"|nationalId : 'yy-mm-dd'}}</h1> -->
 <section style="background-color: #eee">
   <div class="container py-5">
-    <div class="px-5 mb-5">
-      <select name="productName" class="form-select" [(ngModel)]="selectedCategoryId">
-        <option [value]="0">All</option>
-        <option *ngFor="let category of categories" [value]="category.id">
-          {{ category.name }}
-        </option>
-      </select>
-    </div>
     <div *ngFor="let product of products" class="row justify-content-center mb-3">
       <div *ngIf="
           product.categoryId == selectedCategoryId || selectedCategoryId == 0
@@ -19,8 +16,8 @@
               <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
                 <div class="bg-image hover-zoom ripple rounded ripple-surface">
 
-                  <img [routerLink]="['/Products', product.id]" CardStyle [src]="product.img"
-                    class="w-100 cursor-pointer" *ngIf="product.enable" />
+                  <img CardStyle [routerLink]="['/Products', product.id]" [src]="product.img" class="w-100 cursor-pointer"
+                    *ngIf="product.enable" />
 
                   <h1 *ngIf="!product.enable" class="text-success mt-3 text-center">
                     Thanks
@@ -63,9 +60,9 @@
                   We offer an explicit discount of:
                   {{ product.discount }}
                 </h6>
-                <h4>
+                <!-- <h4>
                   {{ "12345678912312356" | creditCard }}
-                </h4>
+                </h4> -->
               </div>
               <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
                 <div class="d-flex flex-row align-items-center mb-1">

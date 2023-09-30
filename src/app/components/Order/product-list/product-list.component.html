@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row align-items-center g-5">
+    <ng-container *ngFor="let product of products">
+      <div class="col-3 p-2">
+        <div class="product-card">
+          <div class="badge text-bg-success"
+            [ngClass]="{'text-bg-warning': product.quantity == 1, 'text-bg-danger': product.quantity == 0}">
+            {{product.quantity}}
+          </div>
+          <div *ngIf="product.discount > 0" class="badge text-bg-info text-white top-50 rounded-end-pill">
+            {{product.discount}}%
+          </div>
+          <a [routerLink]="['/Products/', product.id]" class="product-tumb bg-white p-5">
+            <img CardStyle [src]="product.img" alt="">
+          </a>
+          <div class="product-details bg-light px-3 pt-3">
+            <div class="row justify-content-between align-items-center mb-3">
+              <div class="product-catagory col-5">
+                {{categoriesService.getCategoryById(product.categoryId).name}}
+              </div>
+              <div class="col-5">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+
+            <h4><a [routerLink]="['/Products/', product.id]">{{product.name}}</a></h4>
+            <!-- <p>{{product.details}}</p> -->
+            <div class="product-bottom-details p-2">
+              <div class="product-price">
+                <small *ngIf="product.discount > 0">{{product.price|currency:'USD'}}</small>
+                {{product.price * (product.discount == 0? 1 : (product.discount / 100))|currency:'USD'}}
+              </div>
+              <div class="product-links">
+                <a><fa-icon class="me-3" [icon]="icons.faHeart"></fa-icon></a>
+                <a [ngStyle]="{'pointer-events' : product.quantity == 0 ?'none':'auto'}" class="cursor-pointer"
+                  (click)="AddToCard(product)"><fa-icon [icon]="icons.faShoppingCart"></fa-icon></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

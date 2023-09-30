@@ -1,0 +1,67 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-5">
+      <img [src]="product?.img" class="card-img rounded-top" alt="">
+    </div>
+    <div CardStyle class="col-7 p-0">
+      <span class="fs-2">{{product?.name}} </span>
+      <div class="fs-3">{{ product?.price }} </div>
+      <h6 class="text-success">Free shipping</h6>
+      <div class="d-flex flex-column mt-4">
+        <button [disabled]="product!.quantity == 0" class="col-5 btn btn-primary btn-sm" type="button">
+          Buy
+        </button>
+        <button [disabled]="product!.quantity == 0" class="col-5 btn btn-outline-primary btn-sm mt-2" type="button">
+          Add to wishlist
+        </button>
+        <div class="row justify-content-start mt-5">
+          <div class="btn-group col-5 mt-5" role="group" aria-label="Button group name">
+            <button (click)="previousProduct()" name="" id="" class="col-1 btn btn-primary" role="button">
+              <i class="fs-4 fa-solid fa-arrow-left"></i>
+            </button>
+            <button id="back" (click)="goBack()" class="col-1 fs-4 btn btn-outline-primary" role="button">Back</button>
+            <button (click)="nextProduct()" class="col-1 fs-5 btn btn-primary" role="button">
+              <i class="fs-4 fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- <div class="container mt-5">
+  <div class="row justify-content-center align-items-center g-2">
+    <div class="col-7">
+      <img src="https://m.media-amazon.com/images/I/41oAtcp2wZL._AC_.jpg" class="figure-img rounded-top" alt="">
+    </div>
+    <div class="col-5">
+      <h6 class="text-primary-emphasis">HEADPHONES</h6>
+      <h1 class="">Beats EP</h1>
+      <p class="">
+        The preferred choice of a vast range of acclaimed DJs. Punchy, bass-focused sound and high isolation.
+        Sturdy headband
+        and on-ear cushions suitable for live performance
+      </p>
+      <hr>
+      <div class="">
+        <p>Cable configuration</p>
+        <div class="">
+          <a name="" id="" class="btn btn-primary" href="#" role="button">Button</a>
+          <a name="" id="" class="btn btn-primary" href="#" role="button">Button</a>
+          <a name="" id="" class="btn btn-primary" href="#" role="button">Button</a>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <h3 class="col-4">
+          148$
+        </h3>
+        <div class="col-8">
+          <a name="" id="" class="btn btn-primary" href="#" role="button">Button</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

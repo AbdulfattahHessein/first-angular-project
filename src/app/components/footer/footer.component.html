@@ -1,10 +1,26 @@
-<footer class="bg-light text-center text-lg-start">
+<div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+      <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+        <svg class="bi" width="30" height="24">
+          <use xlink:href="#bootstrap"></use>
+        </svg>
+      </a>
+      <span class="text-muted">© 2023 Company, Inc. All rights reserved.</span>
+    </div>
 
-
-  <!-- Copyright -->
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    © 2020 Copyright:
-    <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-  </div>
-  <!-- Copyright -->
-</footer>
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+      <li class="ms-3">
+        <a class="text-muted" href="#">
+          <fa-icon class="fs-3" [icon]="icons.faTwitter"></fa-icon>
+        </a>
+      </li>
+      <li class="ms-3"><a class="text-muted" href="#">
+          <fa-icon class="fs-3" [icon]="icons.faInstagram"></fa-icon>
+        </a></li>
+      <li class="ms-3"><a class="text-muted" href="#">
+          <fa-icon class="fs-3" [icon]="icons.faFacebook"></fa-icon>
+        </a></li>
+    </ul>
+  </footer>
+</div>

@@ -1,0 +1,88 @@
+<div class="container" id="taha">
+  <form>
+    <div class="mb-3">
+      <h4>
+        <label for="selectedCategoryId" class="form-label">Category</label>
+      </h4>
+
+      <!-- <label for="exampleDataList" class="form-label">Datalist example</label>
+      <input [(ngModel)]="selectedCategoryId" name="selectedCategoryId" class="form-control" list="datalistOptions"
+        id="exampleDataList" placeholder="Type to search...">
+      <datalist id="datalistOptions">
+        <option value="All" selected>
+          <ng-container *ngFor="let category of categoriesService.categories">
+        <option [value]="category.name">
+          </ng-container>
+      </datalist> -->
+      <select [(ngModel)]="selectedCategoryId" class=" form-select form-select-lg" name="selectedCategoryId"
+        id="selectedCategoryId">
+        <option [value]="0" selected>All</option>
+        <ng-container *ngFor="let category of categoriesService.categories">
+          <option [value]="category.id">{{category.name}}</option>
+        </ng-container>
+      </select>
+    </div>
+  </form>
+  <h2>Products</h2>
+  <app-product-list (onAddToCard)="AddToCard($event)" [categoryId]="selectedCategoryId"></app-product-list>
+
+  <div [hidden]="cart.length <= 0" class="table-responsive">
+    <h2 class="py-3">Cart Items</h2>
+    <table class="table table-striped table-hover table-borderless align-middle">
+      <thead class="table-light">
+        <!-- <caption>CartItems</caption> -->
+        <tr>
+          <th>NO</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Count</th>
+          <th>Total Price</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <ng-container *ngFor="let cartItem of cart; let NO = index">
+          <tr class="">
+            <td scope="row">{{NO + 1}}</td>
+            <td>{{cartItem.product.name}}</td>
+            <td>{{cartItem.product.price}}</td>
+            <td>
+
+              <div class="row justify-content-start">
+                <button [disabled]="cartItem.count == 1"
+                  class="col-2 border-0 btn btn-light d-flex justify-content-md-center align-items-center rounded-start-pill"
+                  id="decrease" (click)="decreaseValue(cartItem)" value="Decrease Value">
+                  <fa-icon class="text-danger" [icon]="icons.faMinus"></fa-icon>
+                </button>
+                <input #count
+                  (input)="cartItem.count = +count.value > 0 ? ( +count.value >= cartItem.product.quantity ? cartItem.product.quantity : +count.value) :  1"
+                  class="col-3 text-center border-0" type="text" id="number" [value]="cartItem.count" />
+                <button [disabled]="cartItem.count >= cartItem.product.quantity"
+                  class="col-2 border-0 btn btn-light d-flex justify-content-md-center align-items-center rounded-end-pill"
+                  id="increase" (click)="increaseValue(cartItem)" value="Increase Value">
+                  <fa-icon class="text-danger" [icon]="icons.faPlus"></fa-icon>
+                </button>
+              </div>
+
+            </td>
+            <td>{{cartItem.totalPrice}}</td>
+            <td>
+              <div (click)="removeFromCart(cartItem)" class="px-3"><fa-icon class="text-danger cursor-pointer"
+                  [icon]="icons.faTrashCan"></fa-icon></div>
+              <!-- <a href=""><fa-icon class="text-success" [icon]="icons.faMoneyCheck"></fa-icon></a> -->
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+      <tfoot>
+
+      </tfoot>
+    </table>
+    <div class="container row my-4">
+      <h4 class="col d-flex p-1"> <span> Total Price: {{orderTotalPrice | currency}}</span> </h4>
+      <div class="col-2">
+        <button class="btn btn-success">Checkout</button>
+      </div>
+    </div>
+  </div>
+</div>
